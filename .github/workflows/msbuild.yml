@@ -27,4 +27,4 @@ jobs:
       # Build project using MSBuild
       - name: Build with MSBuild
         run: |
-          msbuild Magnito.sln /p:Configuration=Release /m
+          msbuild SKT2.sln /p:Configuration=Release /m
