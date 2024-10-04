@@ -25,10 +25,10 @@ jobs:
         uses: microsoft/setup-msbuild@v1
 
       #fff
-      - name: Setup .NET Framework
+      - name: Setup .NET SDK
         uses: actions/setup-dotnet@v3
         with:
-         dotnet-version: '8.x'
+         dotnet-version: '6.x'
         
       # Build project using MSBuild
       - name: Build with MSBuild
