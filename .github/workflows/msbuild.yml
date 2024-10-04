@@ -23,12 +23,6 @@ jobs:
       # Setup MSBuild (установка MSBuild)
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v1
-
-      #fff
-      - name: Setup .NET Framework
-        uses: actions/setup-dotnet@v3
-        with:
-         dotnet-version: '4.x'
         
       # Build project using MSBuild
       - name: Build with MSBuild
