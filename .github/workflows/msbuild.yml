@@ -1,28 +1,30 @@
-name: Build C++ project using MSBuild
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: MSBuild
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "master" ]
   pull_request:
-    branches:
-      - main
+    branches: [ "master" ]
 
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      - name: Set up Visual Studio
-        uses: microsoft/setup-msbuild@v1.1
-        with:
-          vs-version: 'latest' # Можно указать конкретную версию, например, '2019'
-
-      - name: Restore NuGet packages
-        run: nuget restore your_project.sln
-
+      # Setup MSBuild (установка MSBuild)
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1
+        
+      # Build project using MSBuild
       - name: Build with MSBuild
-        run: msbuild your_project.sln /p:Configuration=Release
+        run: |
+          msbuild Magnito.sln /p:Configuration=Release /m
