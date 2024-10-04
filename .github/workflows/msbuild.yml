@@ -16,21 +16,15 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      # Checkout the repository
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout code 
+      uses: actions/checkout@v4
 
-      # Setup MSBuild (установка MSBuild)
-      - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v1
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.2
 
-      #fff
-      - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v3
-        with:
-         dotnet-version: '6.x'
-        
-      # Build project using MSBuild
-      - name: Build with MSBuild
-        run: |
-          msbuild SKT2.sln /p:Configuration=Release /m
+    - name: Restore NuGet packages
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: nuget restore ${{env.SOLUTION_FILE_PATH}}
+
+    - name: Build
+      run: msbuild "SKT2.sln" /p:Configuration=Release /m
