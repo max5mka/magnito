@@ -1,0 +1,28 @@
+name: Build C++ project using MSBuild
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Visual Studio
+        uses: microsoft/setup-msbuild@v1.1
+        with:
+          vs-version: 'latest' # Можно указать конкретную версию, например, '2019'
+
+      - name: Restore NuGet packages
+        run: nuget restore your_project.sln
+
+      - name: Build with MSBuild
+        run: msbuild your_project.sln /p:Configuration=Release
